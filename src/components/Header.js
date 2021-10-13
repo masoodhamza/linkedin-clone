@@ -17,14 +17,14 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 const Header = () => {
   return (
     <div className="header">
-      <div className="header_left">
+      <div className="header-left">
         <img src={LinkedInImage} alt="LinkedIn-Logo" />
-        <div className="header_search">
+        <div className="header-search">
           <SearchIcon />
           <input type="text" placeholder="Search" />
         </div>
       </div>
-      <div className="header_right">
+      <div className="header-right">
         <HeaderOptions Icon={HomeIcon} title="Home" />
         <HeaderOptions Icon={PeopleIcon} title="My Networks" />
         <HeaderOptions Icon={WorkIcon} title="Jobs" />
