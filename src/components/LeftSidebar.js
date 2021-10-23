@@ -1,7 +1,10 @@
-import { Avatar } from "@mui/material";
 import React from "react";
+
 import "../assets/styles/LeftSidebar.css";
+
 import Background from "../assets/images/bgimage.jpg";
+
+import { Avatar } from "@mui/material";
 
 const LeftSidebar = () => {
   const RecentItems = ({ title }) => {
