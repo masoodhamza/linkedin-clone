@@ -1,7 +1,8 @@
 import { Avatar } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 import FeedsInputOptions from "./FeedsInputOptions";
+import { db } from "../server/firestore";
 
 // icons
 import PhotoIcon from "@mui/icons-material/Photo";
@@ -10,18 +11,41 @@ import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
 const FeedsInput = () => {
+  const [EnteredPost, setEnteredPost] = useState("");
+
+  const CreatePostHandler = (e) => {
+    e.preventDefault();
+
+    // adding post to firestore db
+    db.collection("posts")
+      .add({
+        postMessage: EnteredPost,
+      })
+      .then(() => alert("Post added successfully."))
+      .catch(() => "Oops! Something went wrong.");
+
+    // clear input field
+    setEnteredPost("");
+  };
+
   return (
     <div className="feedsInput-container">
       <div className="feedsInput-writePost">
         <Avatar />
         <div className="feedsInput-textContainer">
-          <form>
+          <form onSubmit={CreatePostHandler}>
             <input
               type="text"
               className="textInput"
               placeholder="Start a post"
+              value={EnteredPost}
+              onChange={(e) => setEnteredPost(e.target.value)}
             />
-            <input type="submit" style={{ display: "none" }} />
+            {/* <input
+              type="submit"
+              onClick={CreatePostHandler}
+              style={{ display: "none" }}
+            /> */}
           </form>
         </div>
       </div>
