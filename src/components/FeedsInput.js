@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 import FeedsInputOptions from "./FeedsInputOptions";
 import { db } from "../server/firestore";
+import firebase from "firebase/compat/app";
 
 // icons
 import PhotoIcon from "@mui/icons-material/Photo";
@@ -19,10 +20,14 @@ const FeedsInput = () => {
     // adding post to firestore db
     db.collection("posts")
       .add({
-        postMessage: EnteredPost,
+        avatar: "",
+        description: "Full Stack Developer at DevNation",
+        message: EnteredPost,
+        name: "Hamza Masood",
+        publishedAt: firebase.firestore.FieldValue.serverTimestamp(),
       })
-      .then(() => alert("Post added successfully."))
-      .catch(() => "Oops! Something went wrong.");
+      // .then(() => alert("Post added successfully."))
+      .catch(() => alert("Oops! Something went wrong."));
 
     // clear input field
     setEnteredPost("");
