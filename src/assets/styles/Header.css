@@ -6,6 +6,8 @@
   border-bottom: 0.1px solid gray;
   position: sticky;
   top: 0;
+  background-color: #fff;
+  z-index: 100;
 }
 
 .header-left {

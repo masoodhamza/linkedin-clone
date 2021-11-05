@@ -9,19 +9,32 @@ const Feeds = () => {
 
   useEffect(() => {
     db.collection("posts")
-      .get()
-      .then((result) => result.docs)
-      .then((docs) =>
-        docs.map((doc) => ({
-          avatar: doc.data().avatar,
-          description: doc.data().description,
-          message: doc.data().message,
-          name: doc.data().name,
-          // publishedAt: doc.data().publishedAt,
-        }))
-      )
-      .then((posts) => setPosts(posts))
-      .catch((error) => console.log(error));
+      .orderBy("publishedAt", "desc")
+      .onSnapshot((snapshot) => {
+        setPosts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            avatar: doc.data().avatar,
+            description: doc.data().description,
+            message: doc.data().message,
+            name: doc.data().name,
+          }))
+        );
+      });
+
+    // db.collection("posts")
+    //   .get()
+    //   .then((result) => result.docs)
+    //   .then((docs) =>
+    //     docs.map((doc) => ({
+    //       avatar: doc.data().avatar,
+    //       description: doc.data().description,
+    //       message: doc.data().message,
+    //       name: doc.data().name,
+    //     }))
+    //   )
+    //   .then((posts) => setPosts(posts))
+    //   .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
@@ -31,7 +44,7 @@ const Feeds = () => {
   return (
     <div className="feedsContainer">
       <FeedsInput />
-      {Posts && Posts.map((post) => <FeedPosts post={post} />)}
+      {Posts && Posts.map((post) => <FeedPosts key={post.id} post={post} />)}
     </div>
   );
 };
