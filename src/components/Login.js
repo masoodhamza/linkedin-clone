@@ -16,6 +16,10 @@ const Login = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
 
+  // signin fields
+  const [LoginEmail, setLoginEmail] = useState("");
+  const [LoginPassword, setLoginPassword] = useState("");
+
   const SignupHandler = (e) => {
     e.preventDefault();
 
@@ -48,14 +52,45 @@ const Login = () => {
     }
   };
 
+  const SigninHandler = (e) => {
+    e.preventDefault();
+
+    if (LoginEmail.trim().length > 0 && LoginPassword.trim().length > 7) {
+      auth
+        .signInWithEmailAndPassword(LoginEmail, LoginPassword)
+        .then((auth) => {
+          dispatch(
+            login({
+              Email: auth.Email,
+              FullName: auth.FullName,
+              ProfileURL: auth.ProfileURL,
+            })
+          );
+        })
+        .catch((error) => alert(error.message));
+    } else {
+      alert("Please fill all the fields");
+    }
+  };
+
   return (
     <div className="login-container">
       <img src={linkedinlogo} alt="LinkedIn-Logo" />
       {LoginPage ? (
         <div className="login-form">
-          <form>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+          <form onSubmit={SigninHandler}>
+            <input
+              value={LoginEmail}
+              onChange={(e) => setLoginEmail(e.target.value)}
+              type="email"
+              placeholder="Email"
+            />
+            <input
+              value={LoginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
+              type="password"
+              placeholder="Password"
+            />
             <button type="submit">Login</button>
           </form>
           <p>
