@@ -2,7 +2,7 @@ import { Avatar } from "@mui/material";
 import React, { useState } from "react";
 
 import FeedsInputOptions from "./FeedsInputOptions";
-import { db } from "../server/firestore";
+import { db } from "../firebase";
 import firebase from "firebase/compat/app";
 
 // icons
