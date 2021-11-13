@@ -14,13 +14,13 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      if (user) {
+      if (user) {       
         // user is loggedin
         dispatch(
           login({
-            Email: user.email,
-            FullName: user.FullName,
-            ProfileURL: user.ProfileURL,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
           })
         );
       } else {

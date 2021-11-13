@@ -1,12 +1,13 @@
 import React from "react";
-
 import "../assets/styles/LeftSidebar.css";
-
 import Background from "../assets/images/bgimage.jpg";
-
 import { Avatar } from "@mui/material";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 
 const LeftSidebar = () => {
+  const { email, displayName, photoURL } = useSelector(selectUser);
+
   const RecentItems = ({ title }) => {
     return (
       <div>
@@ -20,11 +21,11 @@ const LeftSidebar = () => {
       <div className="leftsidebar">
         <img src={Background} alt="background" />
         <div className="avatar-container">
-          <Avatar />
+          <Avatar src={photoURL} />
         </div>
         <div style={{ borderBottom: "0.1px solid #dfdedb" }}>
-          <h4>Hamza Masood</h4>
-          <p>masood.hamzaa@gmail.com</p>
+          <h4>{displayName}</h4>
+          <p>{email}</p>
         </div>
         <div className="leftsidebar-stats">
           <p className="display-stats">Who viewed your profile</p>

@@ -11,8 +11,8 @@ const Login = () => {
   const [LoginPage, setLoginPage] = useState(true);
 
   // signup fields
-  const [FullName, setFullName] = useState("");
-  const [ProfileURL, setProfileURL] = useState("");
+  const [DisplayName, setDisplayName] = useState("");
+  const [PhotoURL, setPhotoURL] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
 
@@ -24,8 +24,8 @@ const Login = () => {
     e.preventDefault();
 
     if (
-      FullName.trim().length > 0 &&
-      ProfileURL.trim().length > 0 &&
+      DisplayName.trim().length > 0 &&
+      // PhotoURL.trim().length > 0 &&
       Email.trim().length > 0 &&
       Password.trim().length > 7
     ) {
@@ -33,16 +33,16 @@ const Login = () => {
         .createUserWithEmailAndPassword(Email, Password)
         .then((auth) => {
           auth.user.updateProfile({
-            FullName: FullName,
-            ProfileURL: ProfileURL,
+            displayName: DisplayName,
+            photoURL: PhotoURL,
           });
         })
         .then(() => {
           dispatch(
             login({
-              Email: Email,
-              FullName: FullName,
-              ProfileURL: ProfileURL,
+              email: Email,
+              displayName: DisplayName,
+              photoURL: PhotoURL,
             })
           );
         })
@@ -61,9 +61,9 @@ const Login = () => {
         .then((auth) => {
           dispatch(
             login({
-              Email: auth.Email,
-              FullName: auth.FullName,
-              ProfileURL: auth.ProfileURL,
+              email: auth.email,
+              displayName: auth.displayName,
+              photoURL: auth.photoURL,
             })
           );
         })
@@ -106,14 +106,14 @@ const Login = () => {
             <input
               type="text"
               placeholder="Enter Full Name"
-              value={FullName}
-              onChange={(e) => setFullName(e.target.value)}
+              value={DisplayName}
+              onChange={(e) => setDisplayName(e.target.value)}
             />
             <input
               type="text"
               placeholder="Enter Profile Photo URL"
-              value={ProfileURL}
-              onChange={(e) => setProfileURL(e.target.value)}
+              value={PhotoURL}
+              onChange={(e) => setPhotoURL(e.target.value)}
             />
             <input
               type="email"

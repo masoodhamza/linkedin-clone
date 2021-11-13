@@ -10,8 +10,12 @@ import PhotoIcon from "@mui/icons-material/Photo";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 
 const FeedsInput = () => {
+  const { email, displayName, photoURL } = useSelector(selectUser);
+
   const [EnteredPost, setEnteredPost] = useState("");
 
   const CreatePostHandler = (e) => {
@@ -20,10 +24,10 @@ const FeedsInput = () => {
     // adding post to firestore db
     db.collection("posts")
       .add({
-        avatar: "",
-        description: "Full Stack Developer at DevNation",
+        avatar: photoURL,
+        description: email,
         message: EnteredPost,
-        name: "Hamza Masood",
+        name: displayName,
         publishedAt: firebase.firestore.FieldValue.serverTimestamp(),
       })
       // .then(() => alert("Post added successfully."))
@@ -36,7 +40,7 @@ const FeedsInput = () => {
   return (
     <div className="feedsInput-container">
       <div className="feedsInput-writePost">
-        <Avatar />
+        <Avatar src={photoURL} />
         <div className="feedsInput-textContainer">
           <form onSubmit={CreatePostHandler}>
             <input

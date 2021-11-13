@@ -10,11 +10,12 @@ import WorkIcon from "@mui/icons-material/Work";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { auth } from "../firebase";
-import { logout } from "../features/userSlice";
-import { useDispatch } from "react-redux";
+import { logout, selectUser } from "../features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { photoURL } = useSelector(selectUser);
   const SignoutHandler = () => {
     auth.signOut();
     dispatch(logout);
@@ -35,7 +36,10 @@ const Header = () => {
         <HeaderOptions Icon={WorkIcon} title="Jobs" />
         <HeaderOptions Icon={ChatIcon} title="Messaging" />
         <HeaderOptions Icon={NotificationsIcon} title="Notifications" />
-        <HeaderOptions Avatar={Avatar} Signout={SignoutHandler} />
+        <HeaderOptions
+          Avatar={photoURL ? photoURL : Avatar}
+          Signout={SignoutHandler}
+        />
       </div>
     </div>
   );
