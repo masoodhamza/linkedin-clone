@@ -1,5 +1,5 @@
 import { Avatar } from "@mui/material";
-import React from "react";
+import React, { forwardRef } from "react";
 import FeedsInputOptions from "./FeedsInputOptions";
 
 // icons
@@ -8,9 +8,9 @@ import CommentIcon from "@mui/icons-material/Comment";
 import ShareIcon from "@mui/icons-material/Share";
 import SendIcon from "@mui/icons-material/Send";
 
-const FeedPosts = ({ post }) => {
+const FeedPosts = forwardRef(({ post }, ref) => {
   return (
-    <div className="feedPostContainer">
+    <div ref={ref} className="feedPostContainer">
       <div className="feedPostHeader">
         {/* {!post.avatar && <Avatar />} */}
         {post.avatar ? <Avatar src={post.avatar} /> : <Avatar />}
@@ -28,6 +28,6 @@ const FeedPosts = ({ post }) => {
       </div>
     </div>
   );
-};
+});
 
 export default FeedPosts;
