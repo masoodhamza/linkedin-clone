@@ -10,6 +10,11 @@
   z-index: 100;
 }
 
+.header a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .header-left {
   display: flex;
   flex-direction: row;
@@ -17,7 +22,7 @@
   cursor: pointer;
 }
 
-.header-left > img {
+.header-left img {
   object-fit: contain;
   height: 40px;
   margin-right: 10px;
@@ -31,7 +36,7 @@
   height: 40px;
 }
 
-.header-search > input {
+.header-search input {
   border: none;
   background: none;
   outline: none;
@@ -56,11 +61,11 @@
   color: black;
 }
 
-.header-item > div {
+.header-item div {
   font-size: 12px;
 }
 
-.header-item > img {
+.header-item img {
   object-fit: contain;
   height: 40px;
   border-radius: 50%;

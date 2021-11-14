@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import Feeds from "./components/Feeds";
 import Header from "./components/Header";
-import LeftSidebar from "./components/LeftSidebar";
 import Login from "./components/Login";
 import { login, logout, selectUser } from "./features/userSlice";
 import { auth } from "./firebase";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Jobs from "./pages/Jobs";
+import Messaging from "./pages/Messaging";
+import Networks from "./pages/Networks";
 
 function App() {
   const user = useSelector(selectUser);
@@ -14,7 +17,7 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      if (user) {       
+      if (user) {
         // user is loggedin
         dispatch(
           login({
@@ -31,19 +34,25 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
-      {!user ? (
-        <Login />
-      ) : (
-        <div className="app">
-          <Header />
-          <div className="app-body">
-            <LeftSidebar />
-            <Feeds />
+    <Router>
+      <>
+        {!user ? (
+          <Login />
+        ) : (
+          <div className="app">
+            <Header />
+            <div>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/networks" element={<Networks />} />
+                <Route path="/jobs" element={<Jobs />} />
+                <Route path="/messaging" element={<Messaging />} />
+              </Routes>
+            </div>
           </div>
-        </div>
-      )}
-    </>
+        )}
+      </>
+    </Router>
   );
 }
 

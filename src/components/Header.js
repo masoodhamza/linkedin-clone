@@ -31,10 +31,10 @@ const Header = () => {
         </div>
       </div>
       <div className="header-right">
-        <HeaderOptions Icon={HomeIcon} title="Home" />
-        <HeaderOptions Icon={PeopleIcon} title="My Networks" />
-        <HeaderOptions Icon={WorkIcon} title="Jobs" />
-        <HeaderOptions Icon={ChatIcon} title="Messaging" />
+        <HeaderOptions Icon={HomeIcon} title="Home" path="/" />
+        <HeaderOptions Icon={PeopleIcon} title="My Networks" path="/networks" />
+        <HeaderOptions Icon={WorkIcon} title="Jobs" path="/jobs" />
+        <HeaderOptions Icon={ChatIcon} title="Messaging" path="/messaging" />
         <HeaderOptions Icon={NotificationsIcon} title="Notifications" />
         <HeaderOptions
           Avatar={photoURL ? photoURL : Avatar}
