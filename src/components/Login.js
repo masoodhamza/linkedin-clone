@@ -59,11 +59,16 @@ const Login = () => {
       auth
         .signInWithEmailAndPassword(LoginEmail, LoginPassword)
         .then((auth) => {
+          // console.log(
+          //   auth.user.email,
+          //   auth.user.displayName,
+          //   auth.user.photoURL
+          // );
           dispatch(
             login({
-              email: auth.email,
-              displayName: auth.displayName,
-              photoURL: auth.photoURL,
+              email: auth.user.email,
+              displayName: auth.user.displayName,
+              photoURL: auth.user.photoURL,
             })
           );
         })
